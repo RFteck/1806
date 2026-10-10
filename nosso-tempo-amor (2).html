@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nosso Tempo Amor</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#09050f;--card:#150d22;--edge:#3a2166;--purple:#7c4dcc;--lilac:#d1b8f5;--pink:#b69af2;--green:#3fbf8a;--cream:#fbf3e4;--ink:#f1eafb;--soft:#b3a5cc;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);font-family:Georgia,'Times New Roman',serif;text-align:center;overflow-x:hidden}
+header{padding:48px 16px 8px}
+h1{font-family:'Caveat',cursive;font-weight:700;font-size:clamp(3rem,11vw,5.6rem);margin:0;line-height:1;color:var(--pink)}
+h1 em{font-style:normal;color:var(--green)}
+header p{margin:10px 0 0;color:var(--soft);font-style:italic}
+main{max-width:1000px;margin:0 auto;padding:16px;display:flex;flex-direction:column;align-items:center}
+h2{font-family:'Caveat',cursive;font-size:2.3rem;margin:44px 0 14px;color:var(--lilac);border-bottom:3px dashed var(--green);padding:0 18px 2px}
+.box{background:var(--card);border:2px solid var(--edge);border-radius:10px;padding:18px;box-shadow:5px 5px 0 var(--edge);width:100%}
+.form{max-width:560px}
+.row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;align-items:flex-end}
+label{display:flex;flex-direction:column;align-items:center;font-size:.85rem;color:var(--soft);gap:5px;flex:1 1 200px}
+input[type=text],input[type=datetime-local]{font:inherit;width:100%;text-align:center;padding:10px 12px;border-radius:6px;border:2px solid var(--edge);background:var(--cream);color:#2b2236;outline:none}
+input[type=text]:focus,input[type=datetime-local]:focus{border-color:var(--purple)}
+button,.btn{font:inherit;cursor:pointer;border:2px solid var(--edge);border-radius:6px;padding:9px 18px;color:#12081f;background:var(--pink);box-shadow:3px 3px 0 var(--edge);transition:transform .1s,box-shadow .1s}
+button:hover,.btn:hover{transform:translate(1px,1px);box-shadow:2px 2px 0 var(--edge)}
+button.alt{background:var(--lilac)}
+button.ghost{background:var(--cream);color:#3a2b4d;padding:6px 12px;font-size:.85rem}
+.hint{display:block;margin-top:12px;color:var(--soft);font-size:.85rem;font-style:italic}
+.timers{display:flex;flex-wrap:wrap;gap:22px;justify-content:center;margin-top:22px;width:100%}
+.timer{position:relative;width:310px;max-width:100%}
+.timer h3{font-family:'Caveat',cursive;font-size:2rem;margin:0;color:var(--pink);padding:0 20px}
+.timer small{color:var(--soft);font-style:italic}
+.digits{display:flex;justify-content:center;gap:8px;margin:14px 0}
+.digit{background:var(--purple);border:2px solid var(--edge);border-radius:6px;padding:8px 4px;min-width:62px;box-shadow:3px 3px 0 var(--edge)}
+.digit b{display:block;font-size:1.7rem;font-variant-numeric:tabular-nums;color:#fff}
+.digit i{font-size:.62rem;font-style:normal;text-transform:uppercase;letter-spacing:.1em;color:var(--green)}
+.acts{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.x{position:absolute;top:6px;right:6px;background:none;border:0;box-shadow:none;color:var(--soft);padding:4px 8px}
+.x:hover{color:var(--pink);transform:none;box-shadow:none}
+.wall{display:flex;flex-wrap:wrap;gap:40px;justify-content:center;padding:36px 0;width:100%}
+.item{display:flex;flex-direction:column;align-items:center;gap:14px}
+.polaroid{position:relative;background:var(--cream);width:240px;padding:14px 14px 18px;box-shadow:0 8px 18px rgba(0,0,0,.45);transform:rotate(var(--r));transition:transform .25s}
+.polaroid:hover{transform:rotate(0) scale(1.04)}
+.polaroid::before{content:"";position:absolute;top:-11px;left:50%;width:80px;height:22px;margin-left:-40px;transform:rotate(-3deg);background:rgba(63,191,138,.75)}
+.polaroid img{width:100%;aspect-ratio:1;object-fit:cover;display:block;background:#ddd}
+.polaroid .cap{display:block;width:100%;border:0;background:transparent;text-align:center;font-family:'Caveat',cursive;font-size:1.6rem;color:#3a2b4d;margin-top:10px;outline:none;padding:0}
+.polaroid .cap::placeholder{color:#b9a9cc}
+.polaroid .blank{height:34px}
+.logo{width:58px;height:58px;display:block;margin:0 auto 10px}
+.tphoto{width:110px;height:110px;border-radius:50%;object-fit:cover;border:3px solid var(--green);display:block;margin:6px auto 8px}
+.empty{color:var(--soft);font-style:italic;padding:22px}
+footer{color:var(--soft);padding:32px 16px 48px;font-size:.85rem}
+</style>
+</head>
+<body>
+<header>
+  <svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M12 21.2l-1.4-1.3C5.4 15.2 2 12.1 2 8.3 2 5.2 4.4 3 7.4 3c1.7 0 3.4.8 4.6 2.1C13.2 3.8 14.9 3 16.6 3 19.6 3 22 5.2 22 8.3c0 3.8-3.4 6.9-8.6 11.6L12 21.2z"/></svg>
+  <h1>Nosso Tempo <em>♥</em> Amor</h1>
+  <p>cada segundo ao seu lado vale guardar</p>
+</header>
+<main>
+  <h2>Cronômetros</h2>
+  <div class="box form">
+    <div class="row">
+      <label>Nome<input type="text" id="tName" placeholder="Ex.: Juntos desde..." maxlength="40"></label>
+      <label>Contar desde (opcional)<input type="datetime-local" id="tDate"></label>
+    </div>
+    <div class="row" style="margin-top:14px"><label class="btn alt" style="flex:none;font-size:.95rem;color:#12081f"><span id="tFotoTxt">Foto (opcional)</span><input type="file" id="tFoto" accept="image/*" hidden></label><button id="addTimer">+ Adicionar cronômetro</button></div>
+  </div>
+  <div class="timers" id="timers"></div>
+
+  <h2>Nossas fotos</h2>
+  <div class="box form">
+    <div class="row"><label class="btn alt" style="flex:none;color:#12081f;font-size:1rem">Adicionar fotos<input type="file" id="file" accept="image/*" multiple hidden></label></div>
+  </div>
+  <div class="wall" id="wall"></div>
+</main>
+<footer>feito com carinho</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/10.12.2/firebase-app-compat.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/10.12.2/firebase-firestore-compat.min.js"></script>
+<script>
+const FIREBASE_CONFIG={apiKey:"AIzaSyC-VcEkC862CMg7CV0dPC23uxR4nfwZfbI",authDomain:"meu-amor-43eab.firebaseapp.com",projectId:"meu-amor-43eab",storageBucket:"meu-amor-43eab.firebasestorage.app",messagingSenderId:"399470643477",appId:"1:399470643477:web:465424262f9da69b1dc11c"};
+const Store={
+  load(k){try{return JSON.parse(localStorage.getItem(k))||[]}catch(e){return[]}},
+  save(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){alert('Sem espaço para salvar tantas fotos neste navegador. Baixe e remova algumas.');return false}}
+};
+let timers=[],photos=[],db=null;
+if(window.firebase&&FIREBASE_CONFIG.projectId!=='COLE_AQUI'){
+  firebase.initializeApp(FIREBASE_CONFIG);
+  db=firebase.firestore();
+  db.enablePersistence({synchronizeTabs:true}).catch(()=>{});
+}else{timers=Store.load('timers');photos=Store.load('photos')}
+let warned=false;
+function fail(e){console.error(e);if(!warned){warned=true;alert('Não foi possível salvar agora. Confira a internet e as regras do Firebase.')}}
+function local(col){Store.save(col,col==='timers'?timers:photos)}
+function put(col,items){
+  if(!db)return local(col);
+  const b=db.batch();
+  items.forEach(i=>b.set(db.collection(col).doc(i.id),i));
+  b.commit().catch(fail);
+}
+function patch(col,item,fields){
+  if(!db)return local(col);
+  db.collection(col).doc(item.id).update(fields).catch(fail);
+}
+function del(col,id){
+  if(!db)return local(col);
+  db.collection(col).doc(id).delete().catch(fail);
+}
+const $=id=>document.getElementById(id);
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+const pad=n=>String(n).padStart(2,'0');
+
+function elapsed(t){return t.since?Date.now()-t.since:t.acc+(t.run?Date.now()-t.run:0)}
+function parts(ms){ms=Math.max(0,ms);const s=Math.floor(ms/1000);return{d:Math.floor(s/86400),h:Math.floor(s%86400/3600),m:Math.floor(s%3600/60),s:s%60}}
+function digit(l,key){const d=document.createElement('div');d.className='digit';d.innerHTML='<b data-k="'+key+'"></b><i>'+l+'</i>';return d}
+function renderTimers(){
+  const box=$('timers');box.innerHTML='';
+  if(!timers.length){box.innerHTML='<div class="empty">Nenhum cronômetro ainda. Crie o primeiro acima.</div>';return}
+  timers.forEach(t=>{
+    const c=document.createElement('div');c.className='box timer';c.dataset.id=t.id;
+    const h=document.createElement('h3');h.textContent=t.name;
+    const sm=document.createElement('small');sm.textContent=t.since?'desde '+new Date(t.since).toLocaleString('pt-BR'):'cronômetro';
+    const dg=document.createElement('div');dg.className='digits';
+    [['d','dias'],['h','horas'],['m','min'],['s','seg']].forEach(([k,l])=>dg.appendChild(digit(l,k)));
+    const x=document.createElement('button');x.className='x';x.textContent='✕';x.title='Excluir';
+    x.onclick=()=>{if(confirm('Excluir este cronômetro?')){timers=timers.filter(a=>a.id!==t.id);del('timers',t.id);renderTimers()}};
+    if(t.img){const im=document.createElement('img');im.className='tphoto';im.src=t.img;im.alt='';c.append(x,im,h,sm,dg)}else c.append(x,h,sm,dg);
+    const a=document.createElement('div');a.className='acts';
+    if(!t.since){
+      const p=document.createElement('button');p.textContent=t.run?'Pausar':'Iniciar';
+      p.onclick=()=>{if(t.run){t.acc+=Date.now()-t.run;t.run=null}else t.run=Date.now();patch('timers',t,{acc:t.acc,run:t.run});renderTimers()};
+      const r=document.createElement('button');r.className='ghost';r.textContent='Zerar';
+      r.onclick=()=>{t.acc=0;t.run=t.run?Date.now():null;patch('timers',t,{acc:t.acc,run:t.run});renderTimers()};
+      a.append(p,r);
+    }
+    const ph=document.createElement('button');ph.className='ghost';ph.textContent=t.img?'Trocar foto':'Foto';
+    ph.onclick=()=>{const i=document.createElement('input');i.type='file';i.accept='image/*';i.onchange=async()=>{if(!i.files[0])return;const r=await resize(i.files[0],360);if(r){t.img=r;patch('timers',t,{img:r});renderTimers()}};i.click()};
+    a.append(ph);c.appendChild(a);
+    box.appendChild(c);
+  });
+  tick();
+}
+function tick(){
+  timers.forEach(t=>{
+    const c=document.querySelector('.timer[data-id="'+t.id+'"]');if(!c)return;
+    const p=parts(elapsed(t));
+    c.querySelector('[data-k=d]').textContent=p.d;
+    c.querySelector('[data-k=h]').textContent=pad(p.h);
+    c.querySelector('[data-k=m]').textContent=pad(p.m);
+    c.querySelector('[data-k=s]').textContent=pad(p.s);
+  });
+}
+setInterval(tick,250);
+let pendImg=null;
+$('tFoto').onchange=async e=>{const f=e.target.files[0];if(!f)return;pendImg=await resize(f,360);$('tFotoTxt').textContent='Foto escolhida ✓'};
+$('addTimer').onclick=()=>{
+  const name=$('tName').value.trim()||'Nosso tempo';
+  const d=$('tDate').value;
+  const nt={id:uid(),name,since:d?new Date(d).getTime():null,acc:0,run:null,img:pendImg,created:Date.now()};timers.push(nt);
+  pendImg=null;$('tFoto').value='';$('tFotoTxt').textContent='Foto (opcional)';
+  put('timers',[nt]);$('tName').value='';$('tDate').value='';renderTimers();
+};
+
+function resize(file,S0){
+  return new Promise(res=>{
+    const img=new Image(),u=URL.createObjectURL(file);
+    img.onload=()=>{
+      const S=S0||600,side=Math.min(img.width,img.height),cv=document.createElement('canvas');
+      cv.width=cv.height=S;
+      cv.getContext('2d').drawImage(img,(img.width-side)/2,(img.height-side)/2,side,side,0,0,S,S);
+      URL.revokeObjectURL(u);res(cv.toDataURL('image/jpeg',.7));
+    };
+    img.onerror=()=>res(null);img.src=u;
+  });
+}
+$('file').onchange=async e=>{
+  const added=[];let n=0;
+  for(const f of e.target.files){
+    const src=await resize(f);if(!src)continue;
+    const it={id:uid(),src,cap:'',rot:(Math.random()*8-4).toFixed(1)+'deg',created:Date.now()+n++};
+    added.push(it);photos.unshift(it);
+  }
+  e.target.value='';
+  if(added.length){put('photos',added);renderPhotos()}
+};
+function renderPhotos(){
+  const w=$('wall');w.innerHTML='';
+  if(!photos.length){w.innerHTML='<div class="empty">Adicione a primeira foto.</div>';return}
+  photos.forEach(p=>{
+    const item=document.createElement('div');item.className='item';
+    const d=document.createElement('div');d.className='polaroid';d.style.setProperty('--r',p.rot);
+    const im=document.createElement('img');im.src=p.src;im.alt='Foto Polaroid';
+    d.appendChild(im);
+    const slot=document.createElement('div');d.appendChild(slot);
+    const showCap=focus=>{
+      slot.innerHTML='';
+      const cap=document.createElement('input');cap.type='text';cap.className='cap';cap.maxLength=30;cap.placeholder='legenda';cap.value=p.cap;
+      cap.onchange=()=>{const v=cap.value.trim();if(v===p.cap)return;p.cap=v;patch('photos',p,{cap:v});if(!v)hideCap()};
+      slot.appendChild(cap);if(focus)cap.focus();
+    };
+    const hideCap=()=>{slot.innerHTML='<div class="blank"></div>'};
+    if(p.cap)showCap();else hideCap();
+    const a=document.createElement('div');a.className='acts';
+    const lg=document.createElement('button');lg.className='ghost';lg.textContent='Legenda';lg.onclick=()=>showCap(true);
+    const dl=document.createElement('button');dl.className='ghost';dl.textContent='Baixar';dl.onclick=()=>download(p);
+    const rm=document.createElement('button');rm.className='ghost';rm.textContent='Remover';
+    rm.onclick=()=>{if(confirm('Remover esta foto?')){photos=photos.filter(a=>a.id!==p.id);del('photos',p.id);renderPhotos()}};
+    a.append(lg,dl,rm);item.append(d,a);w.appendChild(item);
+  });
+}
+function download(p){
+  const img=new Image();
+  img.onload=()=>{
+    const cv=document.createElement('canvas');cv.width=800;cv.height=960;
+    const g=cv.getContext('2d');
+    g.fillStyle='#fbf3e4';g.fillRect(0,0,800,960);
+    g.drawImage(img,40,40,720,720);
+    if(p.cap){g.fillStyle='#3a2b4d';g.font='56px Caveat, cursive';g.textAlign='center';g.fillText(p.cap,400,860)}
+    const a=document.createElement('a');a.href=cv.toDataURL('image/png');a.download='polaroid-'+p.id+'.png';a.click();
+  };
+  img.src=p.src;
+}
+
+renderTimers();renderPhotos();
+if(db){
+  db.collection('timers').onSnapshot(q=>{timers=q.docs.map(d=>d.data()).sort((a,b)=>a.created-b.created);renderTimers()},fail);
+  db.collection('photos').onSnapshot(q=>{photos=q.docs.map(d=>d.data()).sort((a,b)=>b.created-a.created);renderPhotos()},fail);
+}
+</script>
+</body>
+</html>
